@@ -1,0 +1,30 @@
+package controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import service.BasketService;
+import items.Items;
+import java.util.List;
+
+@RestController
+@RequestMapping("/order")
+public class BasketController {
+    final private BasketService basketService;
+
+    public BasketController(BasketService basketService) {
+        this.basketService = basketService;
+    }
+
+    @GetMapping("/add")
+    public List<Items> add(@RequestParam("itemId") List<Integer> itemIds) {
+        return basketService.add(itemIds);
+    }
+
+    @GetMapping("/get")
+    public List<Items> get() {
+        return basketService.get();
+    }
+}
